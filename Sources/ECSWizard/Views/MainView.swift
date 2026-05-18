@@ -4,6 +4,10 @@ struct MainView: View {
     @EnvironmentObject private var appState: AppState
     @State private var showConnections = false
 
+    private var activeColor: Color {
+        appState.currentConnection?.color.color ?? .accentColor
+    }
+
     var body: some View {
         NavigationSplitView {
             SidebarView()
@@ -11,13 +15,19 @@ struct MainView: View {
         } detail: {
             ContainerDetailView()
         }
+        .tint(activeColor)
+        .overlay(alignment: .top) {
+            activeColor
+                .frame(height: 3)
+                .ignoresSafeArea(edges: .top)
+        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
                     showConnections = true
                 } label: {
                     HStack(spacing: 5) {
-                        Image(systemName: "bolt.fill")
+                        Text(appState.currentConnection?.emoji ?? "")
                         Text(appState.currentConnection?.name ?? "")
                     }
                 }
@@ -25,9 +35,12 @@ struct MainView: View {
             }
         }
         .sheet(isPresented: $showConnections) {
-            ConnectionsView(onConnected: { showConnections = false }, onDismiss: { showConnections = false })
-                .frame(width: 500, height: 380)
-                .environmentObject(appState)
+            ConnectionsView(
+                onConnected: { showConnections = false },
+                onDismiss: { showConnections = false }
+            )
+            .frame(width: 500, height: 380)
+            .environmentObject(appState)
         }
         .onChange(of: appState.showingConnectionPicker) { show in
             if show {

@@ -7,7 +7,6 @@ struct ConnectionsView: View {
     var onConnected: (() -> Void)? = nil
     var onDismiss: (() -> Void)? = nil
 
-    // Identifiable wrapper so .sheet(item:) always creates a fresh form
     private struct FormTarget: Identifiable {
         let id = UUID()
         let connection: Connection?
@@ -35,12 +34,9 @@ struct ConnectionsView: View {
                         ConnectionRow(
                             connection: conn,
                             isCurrent: conn.id == appState.currentConnection?.id,
-                            onConnect: {
-                                appState.connect(conn)
-                                onConnected?()
-                            },
-                            onEdit: { formTarget = FormTarget(connection: conn) },
-                            onDelete: { appState.deleteConnection(conn) }
+                            onConnect: { appState.connect(conn); onConnected?() },
+                            onEdit:    { formTarget = FormTarget(connection: conn) },
+                            onDelete:  { appState.deleteConnection(conn) }
                         )
                     }
                 }
@@ -70,10 +66,7 @@ struct ConnectionsView: View {
         .sheet(item: $formTarget) { target in
             ConnectionFormView(
                 connection: target.connection,
-                onSave: { conn in
-                    appState.saveConnection(conn)
-                    formTarget = nil
-                },
+                onSave: { conn in appState.saveConnection(conn); formTarget = nil },
                 onCancel: { formTarget = nil }
             )
         }
@@ -94,9 +87,9 @@ private struct ConnectionRow: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            Image(systemName: isCurrent ? "bolt.fill" : "bolt")
-                .foregroundColor(isCurrent ? .accentColor : .secondary)
-                .frame(width: 16)
+            Text(connection.emoji)
+                .font(.title3)
+                .frame(width: 28)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(connection.name).fontWeight(.medium)
@@ -105,12 +98,10 @@ private struct ConnectionRow: View {
 
             Spacer()
 
-            // Test button
             Button { runTest() } label: {
                 switch testStatus {
                 case .idle:
-                    Image(systemName: "antenna.radiowaves.left.and.right")
-                        .foregroundColor(.secondary)
+                    Image(systemName: "antenna.radiowaves.left.and.right").foregroundColor(.secondary)
                 case .testing:
                     ProgressView().controlSize(.small)
                 case .success:
@@ -122,17 +113,11 @@ private struct ConnectionRow: View {
             .buttonStyle(.borderless)
             .help("Test connection")
 
-            Button(action: onEdit) {
-                Image(systemName: "pencil")
-            }
-            .buttonStyle(.borderless)
-            .help("Edit")
+            Button(action: onEdit) { Image(systemName: "pencil") }
+                .buttonStyle(.borderless).help("Edit")
 
-            Button(action: onDelete) {
-                Image(systemName: "trash").foregroundColor(.red)
-            }
-            .buttonStyle(.borderless)
-            .help("Delete")
+            Button(action: onDelete) { Image(systemName: "trash").foregroundColor(.red) }
+                .buttonStyle(.borderless).help("Delete")
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
@@ -140,11 +125,16 @@ private struct ConnectionRow: View {
         .onTapGesture { onConnect() }
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(isCurrent ? Color.accentColor.opacity(0.1) : Color(NSColor.controlBackgroundColor))
+                .fill(isCurrent
+                      ? connection.color.color.opacity(0.12)
+                      : Color(NSColor.controlBackgroundColor))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(isCurrent ? Color.accentColor.opacity(0.3) : Color.secondary.opacity(0.2), lineWidth: 1)
+                .stroke(isCurrent
+                        ? connection.color.color.opacity(0.5)
+                        : Color.secondary.opacity(0.2),
+                        lineWidth: isCurrent ? 1.5 : 1)
         )
     }
 
@@ -154,10 +144,7 @@ private struct ConnectionRow: View {
         Task {
             guard let svc = try? AWSService.make(credentials: connection.credentials, region: connection.region),
                   (try? await svc.listClusters()) != nil
-            else {
-                testStatus = .failed
-                return
-            }
+            else { testStatus = .failed; return }
             testStatus = .success
         }
     }
@@ -173,6 +160,8 @@ struct ConnectionFormView: View {
     @State private var name: String
     @State private var credentialsText: String
     @State private var region: String
+    @State private var emoji: String
+    @State private var color: ConnectionColor
     @State private var parseError = false
 
     init(connection: Connection?, onSave: @escaping (Connection) -> Void, onCancel: @escaping () -> Void) {
@@ -191,10 +180,14 @@ struct ConnectionFormView: View {
             }
             _credentialsText = State(initialValue: lines.joined(separator: "\n"))
             _region = State(initialValue: c.region)
+            _emoji  = State(initialValue: c.emoji)
+            _color  = State(initialValue: c.color)
         } else {
-            _name = State(initialValue: "")
+            _name           = State(initialValue: "")
             _credentialsText = State(initialValue: "")
-            _region = State(initialValue: "us-east-1")
+            _region         = State(initialValue: "us-east-1")
+            _emoji          = State(initialValue: "🔵")
+            _color          = State(initialValue: .blue)
         }
     }
 
@@ -219,6 +212,40 @@ struct ConnectionFormView: View {
                 TextField("us-east-1", text: $region).frame(width: 160)
             }
 
+            // Icon + color on same row
+            HStack(spacing: 20) {
+                HStack(spacing: 12) {
+                    Text("Icon").frame(width: 65, alignment: .leading)
+                    TextField("🔵", text: $emoji)
+                        .textFieldStyle(.plain)
+                        .multilineTextAlignment(.center)
+                        .font(.title3)
+                        .frame(width: 44)
+                        .padding(.horizontal, 8).padding(.vertical, 5)
+                        .background(Color(NSColor.textBackgroundColor))
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.secondary.opacity(0.3), lineWidth: 1))
+                        .onChange(of: emoji) { v in
+                            if v.count > 1 { emoji = String(v.prefix(1)) }
+                        }
+                }
+
+                HStack(spacing: 8) {
+                    ForEach(ConnectionColor.allCases, id: \.self) { c in
+                        Circle()
+                            .fill(c.color)
+                            .frame(width: 22, height: 22)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.primary, lineWidth: color == c ? 2.5 : 0)
+                                    .padding(-3)
+                            )
+                            .onTapGesture { color = c; syncEmoji(to: c) }
+                            .animation(.easeInOut(duration: 0.1), value: color)
+                    }
+                }
+            }
+
             if parseError {
                 Text("Could not parse credentials — paste the full export block.")
                     .foregroundColor(.red).font(.caption)
@@ -230,13 +257,14 @@ struct ConnectionFormView: View {
                     .keyboardShortcut(.escape, modifiers: [])
                 Button("Save") { handleSave() }
                     .buttonStyle(.borderedProminent)
+                    .tint(color.color)
                     .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty ||
                               credentialsText.trimmingCharacters(in: .whitespaces).isEmpty)
                     .keyboardShortcut(.return, modifiers: .command)
             }
         }
         .padding(28)
-        .frame(width: 500)
+        .frame(width: 520)
     }
 
     @ViewBuilder
@@ -252,6 +280,20 @@ struct ConnectionFormView: View {
         }
     }
 
+    // Sync emoji to a sensible default when picking a color
+    private func syncEmoji(to c: ConnectionColor) {
+        let defaults: [ConnectionColor: String] = [
+            .red: "🔴", .orange: "🟠", .yellow: "🟡",
+            .green: "🟢", .blue: "🔵", .purple: "🟣",
+            .pink: "🩷", .gray: "⚫"
+        ]
+        // Only auto-sync if the current emoji looks like a default color circle
+        let circleEmojis = Set(defaults.values)
+        if circleEmojis.contains(emoji) {
+            emoji = defaults[c] ?? emoji
+        }
+    }
+
     private func handleSave() {
         guard let creds = AWSCredentials.parse(from: credentialsText) else {
             parseError = true
@@ -262,7 +304,9 @@ struct ConnectionFormView: View {
             id: connection?.id ?? UUID(),
             name: name.trimmingCharacters(in: .whitespaces),
             credentials: creds,
-            region: region.trimmingCharacters(in: .whitespaces)
+            region: region.trimmingCharacters(in: .whitespaces),
+            emoji: emoji.isEmpty ? "🔵" : emoji,
+            color: color
         ))
     }
 }

@@ -1,4 +1,22 @@
 import Foundation
+import SwiftUI
+
+enum ConnectionColor: String, Codable, CaseIterable {
+    case red, orange, yellow, green, blue, purple, pink, gray
+
+    var color: Color {
+        switch self {
+        case .red:    return Color(red: 0.90, green: 0.20, blue: 0.20)
+        case .orange: return Color.orange
+        case .yellow: return Color(red: 0.85, green: 0.70, blue: 0.00)
+        case .green:  return Color(red: 0.15, green: 0.70, blue: 0.30)
+        case .blue:   return Color.blue
+        case .purple: return Color.purple
+        case .pink:   return Color.pink
+        case .gray:   return Color.gray
+        }
+    }
+}
 
 struct AWSCredentials: Codable {
     let accessKeyId: String
@@ -31,4 +49,26 @@ struct Connection: Identifiable, Codable {
     var name: String
     var credentials: AWSCredentials
     var region: String
+    var emoji: String = "🔵"
+    var color: ConnectionColor = .blue
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, credentials, region, emoji, color
+    }
+
+    init(id: UUID = UUID(), name: String, credentials: AWSCredentials, region: String,
+         emoji: String = "🔵", color: ConnectionColor = .blue) {
+        self.id = id; self.name = name; self.credentials = credentials
+        self.region = region; self.emoji = emoji; self.color = color
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id          = try c.decode(UUID.self,           forKey: .id)
+        name        = try c.decode(String.self,         forKey: .name)
+        credentials = try c.decode(AWSCredentials.self, forKey: .credentials)
+        region      = try c.decode(String.self,         forKey: .region)
+        emoji       = try c.decodeIfPresent(String.self,          forKey: .emoji) ?? "🔵"
+        color       = try c.decodeIfPresent(ConnectionColor.self, forKey: .color) ?? .blue
+    }
 }

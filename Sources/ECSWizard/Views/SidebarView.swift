@@ -114,6 +114,9 @@ struct EnvironmentGroup: View {
             Label(env.capitalized, systemImage: envIcon(env))
                 .foregroundColor(.secondary)
                 .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture { isExpanded.toggle() }
         }
         .padding(.leading, 4)
     }
