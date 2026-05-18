@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EE000001000000000000EEEE /* ECSWizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000DDDD /* ECSWizardApp.swift */; };
+		EE000002000000000000EEEE /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000002000000000000DDDD /* AppState.swift */; };
+		EE000003000000000000EEEE /* AWSCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000003000000000000DDDD /* AWSCredentials.swift */; };
+		EE000004000000000000EEEE /* ECSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000004000000000000DDDD /* ECSModels.swift */; };
+		EE000005000000000000EEEE /* AWSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000005000000000000DDDD /* AWSService.swift */; };
+		EE000006000000000000EEEE /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000006000000000000DDDD /* ConnectionService.swift */; };
+		EE000007000000000000EEEE /* CredentialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000007000000000000DDDD /* CredentialsView.swift */; };
+		EE000008000000000000EEEE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000008000000000000DDDD /* MainView.swift */; };
+		EE000009000000000000EEEE /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000009000000000000DDDD /* SidebarView.swift */; };
+		EE000011000000000000EEEE /* ContainerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000011000000000000DDDD /* ContainerDetailView.swift */; };
+		EE000012000000000000EEEE /* DBConnectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000012000000000000DDDD /* DBConnectSheet.swift */; };
+		EE000013000000000000EEEE /* CredentialsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000015000000000000DDDD /* CredentialsStore.swift */; };
+		EE000014000000000000EEEE /* LogsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000016000000000000DDDD /* LogsSheet.swift */; };
+		FF000006000000000000FFFF /* AWSECS in Frameworks */ = {isa = PBXBuildFile; productRef = FF000003000000000000FFFF /* AWSECS */; };
+		FF000007000000000000FFFF /* AWSRDS in Frameworks */ = {isa = PBXBuildFile; productRef = FF000004000000000000FFFF /* AWSRDS */; };
+		FF000008000000000000FFFF /* SmithyIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = FF000005000000000000FFFF /* SmithyIdentity */; };
+		FF000011000000000000FFFF /* AWSCloudWatchLogs in Frameworks */ = {isa = PBXBuildFile; productRef = FF000009000000000000FFFF /* AWSCloudWatchLogs */; };
+		EE000015000000000000EEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD000017000000000000DDDD /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DD000001000000000000DDDD /* ECSWizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECSWizardApp.swift; sourceTree = "<group>"; };
+		DD000002000000000000DDDD /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		DD000003000000000000DDDD /* AWSCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSCredentials.swift; sourceTree = "<group>"; };
+		DD000004000000000000DDDD /* ECSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECSModels.swift; sourceTree = "<group>"; };
+		DD000005000000000000DDDD /* AWSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSService.swift; sourceTree = "<group>"; };
+		DD000006000000000000DDDD /* ConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionService.swift; sourceTree = "<group>"; };
+		DD000007000000000000DDDD /* CredentialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsView.swift; sourceTree = "<group>"; };
+		DD000008000000000000DDDD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DD000009000000000000DDDD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		DD000011000000000000DDDD /* ContainerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerDetailView.swift; sourceTree = "<group>"; };
+		DD000012000000000000DDDD /* DBConnectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConnectSheet.swift; sourceTree = "<group>"; };
+		DD000013000000000000DDDD /* ECSWizard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ECSWizard.entitlements; sourceTree = "<group>"; };
+		DD000014000000000000DDDD /* ECSWizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECSWizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD000015000000000000DDDD /* CredentialsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsStore.swift; sourceTree = "<group>"; };
+		DD000016000000000000DDDD /* LogsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsSheet.swift; sourceTree = "<group>"; };
+		DD000017000000000000DDDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB000006000000000000BBBB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF000006000000000000FFFF /* AWSECS in Frameworks */,
+				FF000007000000000000FFFF /* AWSRDS in Frameworks */,
+				FF000008000000000000FFFF /* SmithyIdentity in Frameworks */,
+				FF000011000000000000FFFF /* AWSCloudWatchLogs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA000005000000000000AAAA = {
+			isa = PBXGroup;
+			children = (
+				CC000001000000000000CCCC /* Sources/ECSWizard */,
+				AA000006000000000000AAAA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA000006000000000000AAAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD000014000000000000DDDD /* ECSWizard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC000001000000000000CCCC /* Sources/ECSWizard */ = {
+			isa = PBXGroup;
+			children = (
+				DD000001000000000000DDDD /* ECSWizardApp.swift */,
+				DD000002000000000000DDDD /* AppState.swift */,
+				DD000013000000000000DDDD /* ECSWizard.entitlements */,
+				DD000017000000000000DDDD /* Assets.xcassets */,
+				CC000002000000000000CCCC /* Models */,
+				CC000003000000000000CCCC /* Services */,
+				CC000004000000000000CCCC /* Views */,
+			);
+			path = Sources/ECSWizard;
+			sourceTree = SOURCE_ROOT;
+		};
+		CC000002000000000000CCCC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DD000003000000000000DDDD /* AWSCredentials.swift */,
+				DD000004000000000000DDDD /* ECSModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CC000003000000000000CCCC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DD000005000000000000DDDD /* AWSService.swift */,
+				DD000006000000000000DDDD /* ConnectionService.swift */,
+				DD000015000000000000DDDD /* CredentialsStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CC000004000000000000CCCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD000007000000000000DDDD /* CredentialsView.swift */,
+				DD000008000000000000DDDD /* MainView.swift */,
+				DD000009000000000000DDDD /* SidebarView.swift */,
+				DD000011000000000000DDDD /* ContainerDetailView.swift */,
+				DD000012000000000000DDDD /* DBConnectSheet.swift */,
+				DD000016000000000000DDDD /* LogsSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB000001000000000000BBBB /* ECSWizard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB000002000000000000BBBB /* Build configuration list for PBXNativeTarget "ECSWizard" */;
+			buildPhases = (
+				BB000005000000000000BBBB /* Sources */,
+				BB000006000000000000BBBB /* Frameworks */,
+				BB000007000000000000BBBB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ECSWizard;
+			packageProductDependencies = (
+				FF000003000000000000FFFF /* AWSECS */,
+				FF000004000000000000FFFF /* AWSRDS */,
+				FF000005000000000000FFFF /* SmithyIdentity */,
+				FF000009000000000000FFFF /* AWSCloudWatchLogs */,
+			);
+			productName = ECSWizard;
+			productReference = DD000014000000000000DDDD /* ECSWizard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA000001000000000000AAAA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					BB000001000000000000BBBB = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA000002000000000000AAAA /* Build configuration list for PBXProject "ECSWizard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA000005000000000000AAAA;
+			packageReferences = (
+				FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
+				FF000002000000000000FFFF /* XCRemoteSwiftPackageReference "smithy-swift" */,
+			);
+			productRefGroup = AA000006000000000000AAAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB000001000000000000BBBB /* ECSWizard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB000007000000000000BBBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE000015000000000000EEEE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB000005000000000000BBBB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE000001000000000000EEEE /* ECSWizardApp.swift in Sources */,
+				EE000002000000000000EEEE /* AppState.swift in Sources */,
+				EE000003000000000000EEEE /* AWSCredentials.swift in Sources */,
+				EE000004000000000000EEEE /* ECSModels.swift in Sources */,
+				EE000005000000000000EEEE /* AWSService.swift in Sources */,
+				EE000006000000000000EEEE /* ConnectionService.swift in Sources */,
+				EE000007000000000000EEEE /* CredentialsView.swift in Sources */,
+				EE000008000000000000EEEE /* MainView.swift in Sources */,
+				EE000009000000000000EEEE /* SidebarView.swift in Sources */,
+				EE000011000000000000EEEE /* ContainerDetailView.swift in Sources */,
+				EE000012000000000000EEEE /* DBConnectSheet.swift in Sources */,
+				EE000013000000000000EEEE /* CredentialsStore.swift in Sources */,
+				EE000014000000000000EEEE /* LogsSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA000003000000000000AAAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA000004000000000000AAAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BB000003000000000000BBBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/ECSWizard/ECSWizard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ECS Wizard";
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "ECS Wizard uses Apple Events to open Terminal for AWS connections.";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecswizard.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BB000004000000000000BBBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Sources/ECSWizard/ECSWizard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ECS Wizard";
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "ECS Wizard uses Apple Events to open Terminal for AWS connections.";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecswizard.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000002000000000000AAAA /* Build configuration list for PBXProject "ECSWizard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000003000000000000AAAA /* Debug */,
+				AA000004000000000000AAAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB000002000000000000BBBB /* Build configuration list for PBXNativeTarget "ECSWizard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB000003000000000000BBBB /* Debug */,
+				BB000004000000000000BBBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/awslabs/aws-sdk-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 1.6.110;
+			};
+		};
+		FF000002000000000000FFFF /* XCRemoteSwiftPackageReference "smithy-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/smithy-lang/smithy-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 0.203.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF000003000000000000FFFF /* AWSECS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSECS;
+		};
+		FF000004000000000000FFFF /* AWSRDS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSRDS;
+		};
+		FF000005000000000000FFFF /* SmithyIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF000002000000000000FFFF /* XCRemoteSwiftPackageReference "smithy-swift" */;
+			productName = SmithyIdentity;
+		};
+		FF000009000000000000FFFF /* AWSCloudWatchLogs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSCloudWatchLogs;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AA000001000000000000AAAA /* Project object */;
+}

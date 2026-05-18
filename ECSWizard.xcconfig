@@ -1,0 +1,2 @@
+PRODUCT_BUNDLE_IDENTIFIER = com.ecswizard.app
+CODE_SIGN_ENTITLEMENTS = Sources/ECSWizard/ECSWizard.entitlements
