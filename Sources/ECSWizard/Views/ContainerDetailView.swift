@@ -12,7 +12,7 @@ private enum ActiveSheet: Identifiable {
 
     var id: UUID {
         switch self {
-        case .db(let ctx): return ctx.id
+        case .db(let ctx):   return ctx.id
         case .logs(let ctx): return ctx.id
         }
     }
@@ -95,10 +95,10 @@ private struct TaskSection: View {
                 .controlSize(.small)
             }
 
-            ForEach(task.containers) { container in
+            ForEach(task.containers.filter { !$0.name.localizedCaseInsensitiveContains("init") }.sorted { $0.name.count < $1.name.count }) { container in
                 ContainerCard(
                     container: container,
-                    onShell: { appState.launchShell(task: task, container: container) },
+                    shellContext: appState.makeShellContext(task: task, container: container),
                     onDB: { onDB(container) },
                     onLogs: { onLogs([container]) }
                 )
@@ -108,39 +108,80 @@ private struct TaskSection: View {
 }
 
 struct ContainerCard: View {
+    @EnvironmentObject private var appState: AppState
     let container: ECSContainer
-    let onShell: () -> Void
+    let shellContext: ShellContext?
     let onDB: () -> Void
     let onLogs: () -> Void
 
+    @State private var shellExpanded = false
+    @State private var terminalHeight: CGFloat = 340
+    @GestureState private var terminalDragOffset: CGFloat = 0
+
+    private var themeColor: Color {
+        appState.currentConnection?.color.color ?? .accentColor
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
+            HStack(spacing: 10) {
                 Image(systemName: "shippingbox")
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(themeColor)
                 Text(container.name)
                     .fontWeight(.medium)
                 Spacer()
-            }
-
-            HStack(spacing: 10) {
-                Button(action: onShell) {
-                    Label("Open Shell", systemImage: "terminal")
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) { shellExpanded.toggle() }
+                } label: {
+                    Label(shellExpanded ? "Close" : "Quick Connect", systemImage: "bolt.fill")
                 }
                 .buttonStyle(.borderedProminent)
-
-                Button(action: onDB) {
-                    Label("Port Forward (DB)", systemImage: "cylinder.split.1x2")
+                .tint(shellExpanded ? .secondary : themeColor)
+                if let ctx = shellContext {
+                    Button { openShellWindow(context: ctx) } label: {
+                        Label("Terminal", systemImage: "terminal")
+                    }
+                    .buttonStyle(.bordered)
+                    .help("Open terminal window")
                 }
-                .buttonStyle(.bordered)
-
+                if container.name.localizedCaseInsensitiveContains("laravel") {
+                    Button(action: onDB) {
+                        Label("Port Forward (DB)", systemImage: "cylinder.split.1x2")
+                    }
+                    .buttonStyle(.bordered)
+                }
                 Button(action: onLogs) {
                     Label("Logs", systemImage: "doc.text.magnifyingglass")
                 }
                 .buttonStyle(.bordered)
             }
+
+            if shellExpanded, let ctx = shellContext {
+                Divider()
+                TerminalViewWrapper(context: ctx)
+                    .frame(height: max(160, terminalHeight + terminalDragOffset))
+                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(Color.secondary.opacity(0.25))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 6)
+                    .padding(.top, 2)
+                    .onHover { hovering in
+                        if hovering { NSCursor.resizeUpDown.push() } else { NSCursor.pop() }
+                    }
+                    .highPriorityGesture(
+                        DragGesture(minimumDistance: 0)
+                            .updating($terminalDragOffset) { value, state, _ in
+                                state = value.translation.height
+                            }
+                            .onEnded { value in
+                                terminalHeight = max(160, terminalHeight + value.translation.height)
+                            }
+                    )
+            }
         }
-        .padding(14)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
         .background(Color(NSColor.controlBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(

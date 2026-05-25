@@ -21,10 +21,12 @@
 		EE000013000000000000EEEE /* CredentialsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000015000000000000DDDD /* CredentialsStore.swift */; };
 		EE000014000000000000EEEE /* LogsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000016000000000000DDDD /* LogsSheet.swift */; };
 		EE000015000000000000EEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD000017000000000000DDDD /* Assets.xcassets */; };
+		EE000016000000000000EEEE /* ShellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000018000000000000DDDD /* ShellView.swift */; };
 		FF000006000000000000FFFF /* AWSECS in Frameworks */ = {isa = PBXBuildFile; productRef = FF000003000000000000FFFF /* AWSECS */; };
 		FF000007000000000000FFFF /* AWSRDS in Frameworks */ = {isa = PBXBuildFile; productRef = FF000004000000000000FFFF /* AWSRDS */; };
 		FF000008000000000000FFFF /* SmithyIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = FF000005000000000000FFFF /* SmithyIdentity */; };
 		FF000011000000000000FFFF /* AWSCloudWatchLogs in Frameworks */ = {isa = PBXBuildFile; productRef = FF000009000000000000FFFF /* AWSCloudWatchLogs */; };
+		FF000014000000000000FFFF /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = FF000013000000000000FFFF /* SwiftTerm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,7 @@
 		DD000015000000000000DDDD /* CredentialsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsStore.swift; sourceTree = "<group>"; };
 		DD000016000000000000DDDD /* LogsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsSheet.swift; sourceTree = "<group>"; };
 		DD000017000000000000DDDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DD000018000000000000DDDD /* ShellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +58,7 @@
 				FF000007000000000000FFFF /* AWSRDS in Frameworks */,
 				FF000008000000000000FFFF /* SmithyIdentity in Frameworks */,
 				FF000011000000000000FFFF /* AWSCloudWatchLogs in Frameworks */,
+				FF000014000000000000FFFF /* SwiftTerm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +123,7 @@
 				DD000011000000000000DDDD /* ContainerDetailView.swift */,
 				DD000012000000000000DDDD /* DBConnectSheet.swift */,
 				DD000016000000000000DDDD /* LogsSheet.swift */,
+				DD000018000000000000DDDD /* ShellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				FF000004000000000000FFFF /* AWSRDS */,
 				FF000005000000000000FFFF /* SmithyIdentity */,
 				FF000009000000000000FFFF /* AWSCloudWatchLogs */,
+				FF000013000000000000FFFF /* SwiftTerm */,
 			);
 			productName = ECSWizard;
 			productReference = DD000014000000000000DDDD /* ECSWizard.app */;
@@ -176,6 +182,7 @@
 			packageReferences = (
 				FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
 				FF000002000000000000FFFF /* XCRemoteSwiftPackageReference "smithy-swift" */,
+				FF000012000000000000FFFF /* XCRemoteSwiftPackageReference "SwiftTerm" */,
 			);
 			productRefGroup = AA000006000000000000AAAA /* Products */;
 			projectDirPath = "";
@@ -215,6 +222,7 @@
 				EE000012000000000000EEEE /* DBConnectSheet.swift in Sources */,
 				EE000013000000000000EEEE /* CredentialsStore.swift in Sources */,
 				EE000014000000000000EEEE /* LogsSheet.swift in Sources */,
+				EE000016000000000000EEEE /* ShellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +414,14 @@
 				version = 0.203.0;
 			};
 		};
+		FF000012000000000000FFFF /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/SwiftTerm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -428,6 +444,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF000001000000000000FFFF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
 			productName = AWSCloudWatchLogs;
+		};
+		FF000013000000000000FFFF /* SwiftTerm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF000012000000000000FFFF /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+			productName = SwiftTerm;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

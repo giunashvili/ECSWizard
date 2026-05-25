@@ -117,12 +117,12 @@ class AppState: ObservableObject {
         isLoadingTasks = false
     }
 
-    func launchShell(task: ECSTask, container: ECSContainer) {
-        guard let cluster = selectedCluster, let conn = currentConnection else { return }
-        ConnectionService.launchShell(
-            cluster: cluster.name,
-            taskArn: task.taskArn,
-            containerName: container.name,
+    func makeShellContext(task: ECSTask, container: ECSContainer) -> ShellContext? {
+        guard let cluster = selectedCluster, let conn = currentConnection else { return nil }
+        return ShellContext(
+            task: task,
+            container: container,
+            clusterName: cluster.name,
             region: conn.region,
             credentials: conn.credentials
         )
